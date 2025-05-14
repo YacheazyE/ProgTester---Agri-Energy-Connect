@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  cow-db-service:
+    build:
+        context: ./CowDB  # Adjusted build context
+        dockerfile: Dockerfile   # Dockerfile for the database
+    container_name: cow-db
+    environment:
+        ACCEPT_EULA: "Y"
+        MSSQL_SA_PASSWORD: "Password1!"
+        MSSQL_PID: "Express"
+    ports:
+        - "1433:1433"
+        - "1400:1433"  
+    volumes:
+        - db_data:/var/opt/mssql
+        - ./logs:/var/opt/mssql/log  # Optional: To access logs
+    restart: always  # Automatically restart on failure
+    networks:
+        - cow-network    
+
+  mvc-service:
+    build:
+      context: .               # Root context to ensure file accessibility
+      dockerfile: ./MVCCow/Dockerfile  # Path to API Dockerfile
+    container_name: mvc-service
+    environment:
+      SQL_CONNECTION_STRING: "Server=cow-db;Database=Farm;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;user id=sa;password=Password1!"
+    ports:
+      - "80:8080"
+    networks:
+      - cow-network    
+  api-service:
+    build:
+      context: .               # Root context to ensure file accessibility
+      dockerfile: ./APICow/Dockerfile  # Path to API Dockerfile
+    container_name: api-service
+    environment:
+      SQL_CONNECTION_STRING: "Server=cow-db;Database=Farm;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;user id=sa;password=Password1!"
+    ports:
+      - "8080:8080"
+    networks:
+      - cow-network
+  api-farm-service:
+    build:
+      context: .               # Root context to ensure file accessibility
+      dockerfile: ./APIFarm/Dockerfile  # Path to API Dockerfile
+    container_name: api-farm-service
+    environment:
+      SQL_CONNECTION_STRING: "Server=cow-db;Database=Farm;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;user id=sa;password=Password1!"
+    ports:
+      - "5154:8080"
+    networks:
+      - cow-network
+  
+
+networks:
+  cow-network:
+    driver: bridge
+
+volumes:
+    db_data:    

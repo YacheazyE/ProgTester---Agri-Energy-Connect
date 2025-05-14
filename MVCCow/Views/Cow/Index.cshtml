@@ -1,0 +1,41 @@
+﻿@model List<Cow>
+
+<h2 class="text-center mt-4">Farm Cows</h2>
+<div class="container mt-4">
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Milk Production</th>
+                <th>Pregnant</th>
+                <th>Last Vet Check</th>
+            </tr>
+        </thead>
+    <tbody>
+        @foreach(var cow in Model)
+        {
+            <tr>
+                <td>@cow.CowID</td>
+                <td>@cow.Name</td>
+                <td>@cow.Breed</td>
+                <td>@cow.Age</td>
+                <td>@cow.MilkProduction</td>
+                <td>
+                 <span class="badge @(cow.IsPregnant ? "bg-success" : "bg-danger")">
+                     @(cow.IsPregnant ? "Yes" : "No")
+                 </span>     
+                </td>
+                <td>@cow.LastVetCheck.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a href ="@Url.Action("Index", "Home")" class="btn btn-primary">Back to Home</a>
+    </div>
+
+    </div>

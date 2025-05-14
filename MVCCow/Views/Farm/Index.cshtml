@@ -1,0 +1,30 @@
+﻿@model List<Farm>
+
+<h2 class="text-center mt-4">Farm Cows</h2>
+
+<div class="container mt-4">
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+    <tbody>
+            @foreach (var farm in Model)
+            {
+                <tr>
+                    <td>@farm.FarmID</td>
+                    <td>@farm.Name</td>
+                    <td>@farm.CreatedDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a href ="@Url.Action("Index", "Home")" class="btn btn-primary">Back to Home</a>
+    </div>
+
+    </div>

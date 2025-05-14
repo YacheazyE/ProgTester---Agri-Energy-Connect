@@ -1,0 +1,6 @@
+@APICow_HostAddress = http://localhost:5186
+
+GET {{APICow_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

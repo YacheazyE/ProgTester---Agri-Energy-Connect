@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about - @ViewBag.cow</p>
+    <a href ="@Url.Action("Index", "Cow")" class="btn btn-primary">View All Cows</a>
+    <a href ="@Url.Action("Index", "Farm")" class="btn btn-primary">View All Farmers</a>
+</div>
