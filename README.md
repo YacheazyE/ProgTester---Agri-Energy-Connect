@@ -14,9 +14,6 @@
 - [🚀 Getting Started](#-getting-started)
   - [📦 Prerequisites](#-prerequisites)
   - [⚙️ Setup Instructions](#️-setup-instructions)
-- [🧑‍🌾 Why It Matters](#-why-it-matters)
-- [📄 License](#-license)
-- [🌍 A Greener Vision for Agriculture](#-a-greener-vision-for-agriculture)
 
 ---
 
